@@ -52,7 +52,10 @@
         result(@false);
     } else if ([@"openAppSettings" isEqualToString:call.method]) {
         [PermissionManager openAppSettings:result];
-    } else {
+    }else if ([@"openNotificationSetting" isEqualToString:call.method]) {
+             [PermissionManager openAppSettings:result];
+         }
+      else {
         result(FlutterMethodNotImplemented);
     }
 }

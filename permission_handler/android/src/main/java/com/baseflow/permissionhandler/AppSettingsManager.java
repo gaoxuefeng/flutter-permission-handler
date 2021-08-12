@@ -2,6 +2,8 @@ package com.baseflow.permissionhandler;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.provider.Settings;
 import android.util.Log;
 
 final class AppSettingsManager {
@@ -14,7 +16,7 @@ final class AppSettingsManager {
             Context context,
             OpenAppSettingsSuccessCallback successCallback,
             ErrorCallback errorCallback) {
-        if(context == null) {
+        if (context == null) {
             Log.d(PermissionConstants.LOG_TAG, "Context cannot be null.");
             errorCallback.onError("PermissionHandler.AppSettingsManager", "Android context cannot be null.");
             return;
@@ -35,5 +37,29 @@ final class AppSettingsManager {
         } catch (Exception ex) {
             successCallback.onSuccess(false);
         }
+    }
+
+    void openNotificationSetting(Context context) {
+        Intent intent = new Intent();
+
+        if (Build.VERSION.SDK_INT >= 26) {
+            intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+            intent.putExtra("android.provider.extra.APP_PACKAGE", context.getPackageName());
+        } else {
+            intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+            intent.putExtra("app_package", context.getPackageName());
+            intent.putExtra("app_uid", context.getApplicationInfo().uid);
+        }
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            context.startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+            openAppSettings(context, appSettingsOpenedSuccessfully -> {
+            }, (errorCode, errorDescription) -> {
+
+            });
+        }
+
     }
 }
