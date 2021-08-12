@@ -21,7 +21,7 @@ dependencies:
   permission_handler_platform_interface:
     git:
       url: https://github.com/gaoxuefeng/flutter-permission-handler.git
-      ref: master
+      ref: 8.2.3
       path: permission_handler_platform_interface
 
 #  permission_handler_platform_interface: ^3.6.1
