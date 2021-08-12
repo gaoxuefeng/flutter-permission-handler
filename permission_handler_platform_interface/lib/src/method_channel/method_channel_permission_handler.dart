@@ -56,6 +56,13 @@ class MethodChannelPermissionHandler extends PermissionHandlerPlatform {
     return wasOpened ?? false;
   }
 
+  Future<bool> openNotificationSetting() async {
+    final wasOpened =
+        await _methodChannel.invokeMethod('openNotificationSetting');
+
+    return wasOpened ?? false;
+  }
+
   /// Requests the user for access to the supplied list of [Permission]s, if
   /// they have not already been granted before.
   ///

@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-
 import androidx.annotation.Nullable;
+
+import java.util.List;
+
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.Result;
-
-import java.util.List;
 
 final class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
     private final Context applicationContext;
@@ -94,6 +94,10 @@ final class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
                                 errorCode,
                                 errorDescription,
                                 null));
+
+                break;
+            case "openNotificationSetting":
+                appSettingsManager.openNotificationSetting(applicationContext);
 
                 break;
             default:
