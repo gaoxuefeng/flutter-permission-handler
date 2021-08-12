@@ -56,7 +56,7 @@ class MethodChannelPermissionHandler extends PermissionHandlerPlatform {
     return wasOpened ?? false;
   }
 
-  Future<bool> openNotificationSetting() async {
+  Future openNotificationSetting() async {
     final wasOpened =
         await _methodChannel.invokeMethod('openNotificationSetting');
 
